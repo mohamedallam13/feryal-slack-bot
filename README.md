@@ -2,8 +2,8 @@
 A simple client for Slack based on Slack API integrated with a script that acts as an interface for info and reminders from Google Sheets, Docs and Forms
 
 
-![Application](./src/screenshots/Screenshot1.png)
-![Application](./src/screenshots/Screenshot2.png)
+![Application](./screenshots/Screenshot1.png)
+![Application](./screenshots/Screenshot2.png)
 
 
 ## Table of Contents
