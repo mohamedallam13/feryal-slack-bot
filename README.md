@@ -1,8 +1,9 @@
 # Feryal-Slack-Bot
-A simple client for slack integrated with a script that acts as an interface for info and reminders from Google Sheets, Docs and Forms
+A simple client for Slack based on Slack API integrated with a script that acts as an interface for info and reminders from Google Sheets, Docs and Forms
 
 
 ![Application](./src/screenshots/Screenshot1.png)
+![Application](./src/screenshots/Screenshot2.png)
 
 
 ## Table of Contents
@@ -40,9 +41,9 @@ clasp push
 
 * Installable on slack
 * Connects to Google Drive, Google Sheets and Google Forms via Google Apps Script
-* Accepts different types of invoices with different conditions
-* Form can add new rows and remove rows dynamically for one type of invoices
-* Submits form response to the Google Apps Script backend which then writes into Google sheets
+* Responds to requests by users
+* Reminds users on slack channels of specific events and alerts about incidents
+* Posts regular updates from live forms
 
 
 
