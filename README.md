@@ -1,56 +1,108 @@
-# Feryal-Slack-Bot
-A simple client for Slack based on Slack API integrated with a script that acts as an interface for info and reminders from Google Sheets, Docs and Forms
+# Feryal Slack Bot
 
+A Google Apps Script Slack bot that connects to Slack's API and acts as an automated interface between a Slack workspace and Google Workspace data. Responds to user commands, sends reminders, and posts regular updates from live Google Forms and Sheets.
 
-![Application](./screenshots/Screenshot1.png)
-![Application](./screenshots/Screenshot2.png)
+![Google Apps Script](https://img.shields.io/badge/Google%20Apps%20Script-4285F4?style=flat&logo=google&logoColor=white)
+![Platform](https://img.shields.io/badge/Platform-Slack%20Bot-purple)
+![Slack](https://img.shields.io/badge/Slack-API-4A154B?logo=slack&logoColor=white)
 
-
-## Table of Contents
-
-* [Technologies](#technologies)
-* [Installation](#installation)
-* [Features](#features)
-* [Questions](#questions)
-
-
-
-## Technologies 
-
-* Google Apps Script
-* JavaScript ES6
-* Lodash
-* clasp
-
-## Installation
-
-To install this application, in VS code after cloning the repo, use [clasp CLI](https://developers.google.com/apps-script/guides/clasp) to create the .clasp.json file
-
-```
-clasp create [scriptTitle]
-```
-
-Then add the destination script id to the .clasp.json file and then push the code using the following command
-
-```
-clasp push
-```
-
+---
 
 ## Features
 
-* Installable on slack
-* Connects to Google Drive, Google Sheets and Google Forms via Google Apps Script
-* Responds to requests by users
-* Reminds users on slack channels of specific events and alerts about incidents
-* Posts regular updates from live forms
+- Installable Slack bot that receives slash commands and events via webhook
+- Connects to Google Drive, Google Sheets, and Google Forms via GAS server-side calls
+- Responds to user requests with data pulled from Google Workspace
+- Sends scheduled reminders to Slack channels about events and incidents
+- Posts regular updates sourced from live form responses
+- GIPHY integration for image responses
+- Feature-module architecture — each functional area is an isolated module
 
+---
 
+## Tech Stack
 
-## Questions 
+| Layer        | Technology                               |
+|--------------|------------------------------------------|
+| Platform     | Google Apps Script (WebApp webhook)      |
+| Messaging    | Slack API (via `UrlFetchApp`)            |
+| Integrations | Google Sheets, Google Drive, Google Forms |
+| Media        | GIPHY API                                |
+| Deploy       | clasp CLI                                |
 
-If you have any more questions, please contact me here:
+---
 
-Github Username: [mohamedallam13](https://mohamedallam13.github.io/react-professional-portfolio/)
+## Project Structure
 
-Email: [mohamedallam.tu@gmail.com](mailto:mohamedallam.tu@gmail.com)
+```
+feryal-slack-bot/
+├── README.md
+├── AGENT.md
+├── .gitignore
+├── package.json         # Dev-only (clasp tooling) — not used at runtime
+├── screenshots/
+└── src/
+    ├── appsscript.json       # GAS manifest
+    ├── Bot_f0-Main.js        # Entry point: doPost() dispatcher
+    ├── Bot_f1-Moderation.js  # Moderation commands
+    ├── Bot_f2-Groundteam.js  # Ground team commands
+    ├── Bot_f3-Community.js   # Community commands
+    ├── Bot_f4-Posting.js     # Posting commands
+    ├── GIPHY Library.js      # GIPHY API integration
+    └── Toolkit.js            # Shared utility functions
+```
+
+**Naming convention:** `Bot_f#-` prefix = feature module number. `Bot_f0-Main.js` receives all incoming Slack events and dispatches to the appropriate feature module.
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- A Google account with Google Apps Script access
+- A Slack workspace with permission to install apps
+- [clasp](https://github.com/google/clasp) installed globally
+
+```bash
+npm install -g @google/clasp
+clasp login
+```
+
+### Setup
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/mohamedallam13/feryal-slack-bot.git
+   cd feryal-slack-bot
+   ```
+
+2. Link to your Apps Script project:
+   ```bash
+   clasp create --type webapp --title "Feryal Slack Bot" --rootDir src
+   ```
+
+3. Push source files:
+   ```bash
+   clasp push
+   ```
+
+4. Store your Slack tokens in **Script Properties** (not in code):
+   - In the Apps Script editor, go to **Project Settings > Script Properties**
+   - Add: `SLACK_TOKEN`, `SLACK_SIGNING_SECRET`, `GIPHY_API_KEY`
+
+---
+
+## Deployment
+
+1. In the Apps Script editor, go to **Deploy > New deployment**
+2. Select type: **Web app**
+3. Set **Execute as**: Me · **Who has access**: Anyone
+4. Click **Deploy** — copy the Web App URL
+5. In your Slack App settings, set the Web App URL as the **Request URL** for slash commands and events
+
+---
+
+## Author
+
+**Mohamed Allam** — [GitHub](https://github.com/mohamedallam13) · [Email](mailto:mohamedallam.tu@gmail.com)
